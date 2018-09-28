@@ -8,3 +8,7 @@ class CatalogTaskStorage(DefaultInterface):
     @abstractmethod
     def insert(self, catalog_task: CatalogTask) -> None:
         pass
+
+    @abstractmethod
+    def list(self) -> [CatalogTask]:
+        pass

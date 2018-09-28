@@ -6,6 +6,8 @@ from src.main.catalog.business.CatalogPrepareToApplyBusinessLogic import Catalog
 from src.main.catalog.business.CatalogPrepareToApplyBusinessLogicImpl import CatalogPrepareToApplyBusinessLogicImpl
 from src.main.catalog.business.CatalogTaskCreateBusinessLogic import CatalogTaskCreateBusinessLogic
 from src.main.catalog.business.CatalogTaskCreateBusinessLogicImpl import CatalogTaskCreateBusinessLogicImpl
+from src.main.catalog.business.CatalogTaskListBusinessLogic import CatalogTaskListBusinessLogic
+from src.main.catalog.business.CatalogTaskListBusinessLogicImpl import CatalogTaskListBusinessLogicImpl
 from src.main.catalog.storage.CatalogStorage import CatalogStorage
 from src.main.catalog.storage.CatalogTaskStorage import CatalogTaskStorage
 from src.main.catalog.storage.DataMapperCatalog import DataMapperCatalog
@@ -24,6 +26,8 @@ class CatalogModule(Module):
 
         binder.bind(interface=CatalogTaskCreateBusinessLogic, to=CatalogTaskCreateBusinessLogicImpl)
         binder.bind(CatalogTaskCreateBusinessLogicImpl, scope=singleton)
+        binder.bind(interface=CatalogTaskListBusinessLogic, to=CatalogTaskListBusinessLogicImpl)
+        binder.bind(CatalogTaskListBusinessLogicImpl, scope=singleton)
         #endregion
 
         #region Storage

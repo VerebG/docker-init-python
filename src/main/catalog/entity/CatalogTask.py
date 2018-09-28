@@ -23,3 +23,21 @@ class CatalogTask(object):
         self.__name = name
         self.__resource_definition = resource_definition
         self.__register = register
+
+    def get_id(self) -> str:
+        return self.__id
+
+    def get_catalog_id(self) -> str:
+        return self.__catalog_id
+
+    def get_name(self) -> str:
+        return self.__name
+
+    def get_resource_definition(self) -> Resource:
+        return self.__resource_definition
+
+    def get_register(self) -> Optional[str]:
+        return self.__register
+
+    def __repr__(self):
+        return 'CatalogTask(id: {0}, catalog_id: {1}, name: {2}, resource_definition: {3}, register: {4})'.format(self.get_id(), self.get_catalog_id(), self.get_name(), self.get_resource_definition(), self.get_register())
