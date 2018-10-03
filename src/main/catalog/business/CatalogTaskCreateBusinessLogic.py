@@ -8,9 +8,8 @@ from src.main.resource.entity.Resource import Resource
 class CatalogTaskCreateBusinessLogic(DefaultInterface):
     @abstractmethod
     def create(self,
-       catalog_id: str,
-       name: str,
-       resource_definition: Resource,
-       register: str
+        name: str,
+        resource_definition: Resource,
+        register: str
     ) -> CatalogTask:
         pass

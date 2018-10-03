@@ -1,3 +1,4 @@
+from typing import Optional
 from injector import inject
 
 from src.main.catalog.business.CatalogTaskCreateBusinessLogic import CatalogTaskCreateBusinessLogic
@@ -5,7 +6,6 @@ from src.main.catalog.entity.CatalogTask import CatalogTask
 from src.main.catalog.storage.CatalogTaskStorage import CatalogTaskStorage
 from src.main.common.logging.AppLogger import AppLogger
 from src.main.common.random.RandomIdGenerator import RandomIdGenerator
-from src.main.resource.entity.Resource import Resource
 
 
 class CatalogTaskCreateBusinessLogicImpl(CatalogTaskCreateBusinessLogic):
@@ -24,12 +24,17 @@ class CatalogTaskCreateBusinessLogicImpl(CatalogTaskCreateBusinessLogic):
         self.__random_id_generator = random_id_generator
 
     def create(self,
-       catalog_id: str,
-       name: str,
-       resource_definition: Resource,
-       register: str
+        catalog_id: str,
+        name: str,
+        register: Optional[str]
     ) -> CatalogTask:
-        __catalog_task = CatalogTask(self.__random_id_generator, catalog_id, name, resource_definition, register)
+        # TODO: betenni a catalog ID-t és leválasztani külön a resource definíciót
+        __catalog_task = CatalogTask(
+            catalog_id,
+            self.__random_id_generator.get(),
+            name,
+            register
+        )
 
         self.__catalog_task_storage.insert(__catalog_task)
 

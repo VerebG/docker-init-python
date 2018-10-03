@@ -9,5 +9,3 @@ class CatalogStorage(DefaultInterface):
     def insert(self, catalog: Catalog):
         pass
 
-    def list(self) -> [Catalog]:
-        pass

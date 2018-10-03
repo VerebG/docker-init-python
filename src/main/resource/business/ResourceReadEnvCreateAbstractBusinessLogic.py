@@ -3,7 +3,7 @@ from abc import abstractmethod
 from src.main.common.default.DefaultInterface import DefaultInterface
 
 
-class CatalogPrepareToApplyBusinessLogic(DefaultInterface):
+class ResourceReadEnvCreateAbstractBusinessLogic(DefaultInterface):
     @abstractmethod
-    def prepare_to_apply(self, catalog_file: str) -> None:
+    def create_abstraction(self, resource_definition: {}):
         pass

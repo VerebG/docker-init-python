@@ -9,8 +9,10 @@ class Catalog(object):
         self.__id = id
         self.__name = name
 
-    def get_id(self) -> str:
+    @property
+    def id(self) -> str:
         return self.__id
 
-    def get_name(self) -> str:
+    @property
+    def name(self) -> str:
         return self.__name

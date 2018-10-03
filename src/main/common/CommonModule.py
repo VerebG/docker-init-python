@@ -1,4 +1,4 @@
-from injector import Module, singleton, Key
+from injector import Module, singleton
 
 from src.main.common.CommonKey import CommonKey
 from src.main.common.logging.AppLogger import AppLogger
@@ -22,3 +22,4 @@ class CommonModule(Module):
 
         binder.bind(AppLogger, scope=singleton)
         binder.bind(RandomIdGenerator, scope=singleton)
+        #binder.bind(Constant, scope=singleton)

@@ -6,12 +6,9 @@ from src.main.catalog.storage.CatalogStorage import CatalogStorage
 
 @singleton
 class DataMapperCatalog(CatalogStorage):
-    __catalog_storage = deque()
+    __catalog_storage = dict()
 
     def insert(self, catalog: Catalog):
-        self.__catalog_storage.append(catalog)
-
-    def list(self) -> [Catalog]:
-        list(self.__catalog_storage)
+        self.__catalog_storage.__setitem__(catalog.id, catalog)
 
 
