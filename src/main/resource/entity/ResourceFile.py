@@ -1,6 +1,5 @@
 from pathlib import Path
 from typing import Optional
-from sortedcontainers import SortedSet
 
 from src.main.resource.entity.Resource import Resource
 
