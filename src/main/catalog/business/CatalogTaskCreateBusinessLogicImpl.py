@@ -28,10 +28,9 @@ class CatalogTaskCreateBusinessLogicImpl(CatalogTaskCreateBusinessLogic):
         name: str,
         register: Optional[str]
     ) -> CatalogTask:
-        # TODO: betenni a catalog ID-t és leválasztani külön a resource definíciót
         __catalog_task = CatalogTask(
-            catalog_id,
             self.__random_id_generator.get(),
+            catalog_id,
             name,
             register
         )

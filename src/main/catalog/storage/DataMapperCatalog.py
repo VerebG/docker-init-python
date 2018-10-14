@@ -11,4 +11,6 @@ class DataMapperCatalog(CatalogStorage):
     def insert(self, catalog: Catalog):
         self.__catalog_storage.__setitem__(catalog.id, catalog)
 
+    def list(self) -> [Catalog]:
+        return [catalog for catalog in self.__catalog_storage.values()]
 

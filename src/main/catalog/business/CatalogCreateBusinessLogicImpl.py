@@ -7,12 +7,10 @@ from src.main.catalog.business.CatalogCreateBusinessLogic import CatalogCreateBu
 from src.main.catalog.business.CatalogTaskCreateBusinessLogic import CatalogTaskCreateBusinessLogic
 from src.main.catalog.entity.Catalog import Catalog
 from src.main.catalog.storage.CatalogStorage import CatalogStorage
-from src.main.catalog.storage.CatalogTaskStorage import CatalogTaskStorage
 from src.main.common.constant.Constant import Constant
 from src.main.common.logging.AppLogger import AppLogger
 from src.main.common.random.RandomIdGenerator import RandomIdGenerator
 from src.main.resource.business.ResourceSelectorBusinessLogic import ResourceSelectorBusinessLogic
-from src.main.resource.storage.ResourceStorage import ResourceStorage
 
 
 @singleton
@@ -23,8 +21,6 @@ class CatalogCreateBusinessLogicImpl(CatalogCreateBusinessLogic):
     __catalog_task_create_business_logic: CatalogTaskCreateBusinessLogic
     __resource_selector_business_logic: ResourceSelectorBusinessLogic
     __catalog_storage: CatalogStorage
-    __catalog_task_storage: CatalogTaskStorage
-    __resource_storage: ResourceStorage
 
     @inject
     def __init__(self,
@@ -33,9 +29,7 @@ class CatalogCreateBusinessLogicImpl(CatalogCreateBusinessLogic):
         random_id_generator: RandomIdGenerator,
         catalog_task_create_business_logic: CatalogTaskCreateBusinessLogic,
         resource_selector_business_logic: ResourceSelectorBusinessLogic,
-        catalog_storage: CatalogStorage,
-        catalog_task_storage: CatalogTaskStorage,
-        resource_storage: ResourceStorage
+        catalog_storage: CatalogStorage
     ) -> None:
         self.__logger = logger
         self.__constant = constant
@@ -43,8 +37,6 @@ class CatalogCreateBusinessLogicImpl(CatalogCreateBusinessLogic):
         self.__catalog_task_create_business_logic = catalog_task_create_business_logic
         self.__resource_selector_business_logic = resource_selector_business_logic
         self.__catalog_storage = catalog_storage
-        self.__catalog_task_storage = catalog_task_storage
-        self.__resource_storage = resource_storage
 
     def create(self, catalog_file: str) -> Catalog:
         __catalog_file = Path(catalog_file)
@@ -71,7 +63,7 @@ class CatalogCreateBusinessLogicImpl(CatalogCreateBusinessLogic):
         for task in __read_catalog['tasks']:
             try:
                 self.__logger.catalog_task_name = task['name']
-            except:
+            except KeyError:
                 task['name'] = '#{0}'.format(readed_task_id)
                 self.__logger.catalog_task_name = task['name']
 
@@ -85,13 +77,8 @@ class CatalogCreateBusinessLogicImpl(CatalogCreateBusinessLogic):
                 self.__logger.critical('Unknown resource type {0}'.format(__resource_type))
 
             __catalog_task = self.__catalog_task_create_business_logic.create(__catalog.id, task['name'], task['register'])
-            self.__catalog_task_storage.insert(__catalog_task)
-
             __resource_abstraction_create_business_logic = self.__resource_selector_business_logic.get_resource_abstraction_create_business_logic(__resource_type)
-            __resource = __resource_abstraction_create_business_logic.create_abstraction(task[__resource_type], __catalog_task.id),
-            self.__resource_storage.insert(__resource[0])
-
-            self.__logger.info('Successfully read resource')
+            __resource_abstraction_create_business_logic.create_abstraction(task[__resource_type], __catalog_task.id),
 
             readed_task_id+=1
 

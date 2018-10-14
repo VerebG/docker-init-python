@@ -1,24 +1,20 @@
-from abc import abstractmethod, ABC, ABCMeta
-
-from src.main.common.default.DefaultInterface import DefaultInterface
+from abc import abstractmethod
+from typing import Optional
 
 
 class Resource(object):
     __id: str
     __catalog_task_id: str
     __state: str
-    __checksum: str
 
     def __init__(self,
         id: str,
         catalog_task_id: str,
-        state: str,
-        checksum: str
+        state: str
     ) -> None:
         self.__id = id
         self.__catalog_task_id = catalog_task_id
         self.__state = state
-        self.__checksum = checksum
 
     @property
     def id(self) -> str:
@@ -32,17 +28,21 @@ class Resource(object):
     def state(self) -> str:
         return self.__state
 
-    @property
-    def checksum(self) -> str:
-        return self.__checksum
-
-    @property
-    def PRESENT(self) -> str:
-        return 'present'
-
-    @property
-    def ABSENT(self) -> str:
-        return 'absent'
-
+    @abstractmethod
     def __eq__(self, other):
+        pass
+
+    @property
+    @abstractmethod
+    def resource_attr_to_comparison(self) -> set:
+        pass
+
+    @property
+    @abstractmethod
+    def can_register(self) -> Optional[str]:
+        pass
+
+    @property
+    @abstractmethod
+    def create_from_exist(self) -> str:
         pass

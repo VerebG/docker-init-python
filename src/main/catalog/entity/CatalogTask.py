@@ -37,5 +37,5 @@ class CatalogTask(object):
     def register(self) -> Optional[str]:
         return self.__register
 
-    def __repr__(self):
-        return 'CatalogTask(id: {0}, catalog_id: {1}, name: {2}, resource_definition: {3}, register: {4})'.format(self.id, self.catalog_id, self.name, self.register)
+    # def __repr__(self):
+    #     return 'CatalogTask(id: {0}, catalog_id: {1}, name: {2}, resource_definition: {3}, register: {4})'.format(self.id, self.catalog_id, self.name, self.register)

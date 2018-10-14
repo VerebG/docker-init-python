@@ -10,5 +10,9 @@ class CatalogTaskStorage(DefaultInterface):
         pass
 
     @abstractmethod
+    def get_by_catalog_id(self, catalog_id: str) -> [CatalogTask]:
+        pass
+
+    @abstractmethod
     def list(self) -> [CatalogTask]:
         pass

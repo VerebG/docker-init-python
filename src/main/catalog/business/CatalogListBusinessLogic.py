@@ -1,9 +1,10 @@
 from abc import abstractmethod
 
+from src.main.catalog.entity.Catalog import Catalog
 from src.main.common.default.DefaultInterface import DefaultInterface
 
 
-class ResourceReadEnvCreateAbstractBusinessLogic(DefaultInterface):
+class CatalogListBusinessLogic(DefaultInterface):
     @abstractmethod
-    def create_abstraction(self, resource_definition: {}):
+    def list(self) -> [Catalog]:
         pass

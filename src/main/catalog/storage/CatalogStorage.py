@@ -9,3 +9,6 @@ class CatalogStorage(DefaultInterface):
     def insert(self, catalog: Catalog):
         pass
 
+    @abstractmethod
+    def list(self) -> [Catalog]:
+        pass
