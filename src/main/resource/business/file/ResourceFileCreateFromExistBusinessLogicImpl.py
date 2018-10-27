@@ -27,7 +27,7 @@ class ResourceFileCreateFromExistBusinessLogicImpl(ResourceFileCreateFromExistBu
             if not resource_file_abstraction.source in [None, '']:
                 with open(resource_file_abstraction.source.__str__()) as file:
                     template = Template(file.read())
-                __source_content_checksum = sha256(template.render(self.__catalog_var_list_all_business_logic.list_all()).encode('UTF-8')).hexdigest()
+                __source_content_checksum = sha256(template.render(self.__catalog_var_list_all_business_logic.list_all(), 'r', encoding="utf-8").encode('UTF-8')).hexdigest()
 
             return ResourceFile(
                 '',

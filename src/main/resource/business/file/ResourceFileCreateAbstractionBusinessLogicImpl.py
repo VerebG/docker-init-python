@@ -42,7 +42,7 @@ class ResourceFileCreateAbstractionBusinessLogicImpl(ResourceFileCreateAbstracti
         if 'path' in resource_definition:
             resource_definition['path'] = Path(resource_definition['path'])
             if resource_definition['path'].is_file():
-                resource_definition['content_checksum'] = sha256(open(resource_definition['path'].__str__(), 'r').read().encode('UTF-8')).hexdigest()
+                resource_definition['content_checksum'] = sha256(open(resource_definition['path'].__str__(), 'r', encoding="utf-8").read().encode('UTF-8')).hexdigest()
         else:
             self.__logger.critical('\'path\' paramater must be filled!')
 
