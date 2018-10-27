@@ -19,7 +19,7 @@ Priority: optional
 Architecture: amd64
 Depends:
 Maintainer: Gabor Vereb <gabor@vereb.it>
-Description:
+Description: Manage your config files on Ubuntu
 
 EOL
 
