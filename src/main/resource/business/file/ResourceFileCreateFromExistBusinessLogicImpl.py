@@ -1,7 +1,7 @@
+from os.path import dirname, basename
 from injector import singleton, inject
 from hashlib import sha256
-
-from jinja2 import Template
+from jinja2 import FileSystemLoader, Environment
 
 from src.main.catalog.business.CatalogVarListAllBusinessLogic import CatalogVarListAllBusinessLogic
 from src.main.common.fileinfo.FileInfo import FileInfo
@@ -25,9 +25,9 @@ class ResourceFileCreateFromExistBusinessLogicImpl(ResourceFileCreateFromExistBu
             __source_content_checksum = None
 
             if not resource_file_abstraction.source in [None, '']:
-                with open(resource_file_abstraction.source.__str__()) as file:
-                    template = Template(file.read())
-                __source_content_checksum = sha256(template.render(self.__catalog_var_list_all_business_logic.list_all(), 'r', encoding="utf-8").encode('UTF-8')).hexdigest()
+                templateEnv = Environment(loader=FileSystemLoader(searchpath=dirname(resource_file_abstraction.source.__str__())))
+                template = templateEnv.get_template(basename(resource_file_abstraction.source.__str__()))
+                __source_content_checksum = sha256(template.render(self.__catalog_var_list_all_business_logic.list_all()).encode('UTF-8')).hexdigest()
 
             return ResourceFile(
                 '',

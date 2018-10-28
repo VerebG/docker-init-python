@@ -17,7 +17,7 @@ class ResourceFileModifyByContentBusinessLogicImpl(ResourceFileModifyByContentBu
 
     def modify(self, resource_file: ResourceFile) -> None:
 
-        with open(resource_file.source.__str__()) as file:
+        with open(resource_file.source.__str__(), 'r', encoding="utf-8") as file:
             template = Template(file.read())
 
         template.stream(self.__catalog_var_list_all_business_logic.list_all()).dump(resource_file.path.__str__(), encoding='UTF-8')
